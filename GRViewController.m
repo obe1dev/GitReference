@@ -23,19 +23,55 @@ static NSString * const Reference = @"reference";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //self.view.backgroundColor = [UIColor redColor];
+    
+    //making scroll view
+    //scroll view color
+    self.view.backgroundColor = [UIColor blackColor];
+    // alloc and creating the size.
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:scrollView];
     
     
-    //scrollView.title = @"GitReference";
+    //title for the scroll view
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(110 , 10, self.view.frame.size.width,50)];
+    //set color
+    title.textColor = [UIColor redColor];
+    //entering the text
     title.text = @"GitReference";
+    //adding a view to the scrool view
+     [scrollView addSubview:title];
     
-    [scrollView addSubview:title];
-   
-    for (<#type *object#> in gitCommands) {
-        <#statements#>
+    CGFloat space = 70;
+    
+    
+    //
+    for (NSDictionary *gitCommands in [self gitCommands] ) {
+        
+        //fetch the command and referance from the array and put them as a property
+        NSString * command = gitCommands[Command];
+        NSString * referance = gitCommands[Reference];
+        
+        UILabel *gitCommands = [[UILabel alloc]initWithFrame:CGRectMake(margin, space, self.view.frame.size.width, 30)];
+        
+        gitCommands.font = [UIFont boldSystemFontOfSize:20];
+        gitCommands.textColor =[UIColor redColor];
+        gitCommands.text = command;
+        //adding the command from the array to the scrollview
+        [scrollView  addSubview:gitCommands];
+        
+        space += 30;
+        
+        //
+        UILabel *gitReferance = [[UILabel alloc]initWithFrame:CGRectMake(margin, space, self.view.frame.size.width, 20)];
+        gitReferance.textColor = [UIColor greenColor];
+        gitReferance.text = referance;
+        
+        [scrollView addSubview:gitReferance];
+        
+        space += 50;
+        
+        scrollView.contentSize = CGSizeMake(self.view.frame.size.width, space);
+        
     }
     
 }
